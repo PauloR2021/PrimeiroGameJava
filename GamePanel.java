@@ -10,7 +10,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
 
-    Thread gamThread;
+    Thread gameThread;
 
     Player player = new Player(this);
 
@@ -22,15 +22,15 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         this.setFocusable(true);
     }
     public void startGameThread(){
-        gamThread = new Thread();
-        gamThread.start();
+        gameThread = new Thread(this);
+        gameThread.start();
     }
 
     public void run(){
         double drawInterval = 1000000000 / 60; // 60 FPS
         double nextDrawTime = System.nanoTime() + drawInterval;
 
-        while(gamThread != null){
+        while(gameThread != null){
             update();
             repaint();
 

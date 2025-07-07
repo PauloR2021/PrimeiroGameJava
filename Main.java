@@ -10,12 +10,14 @@ public class Main {
         window.setTitle("RPG 2D Simples");
 
         GamePanel gamePanel = new GamePanel();
-        window.add(gamePanel);
+        window.setContentPane(gamePanel);
         window.pack();
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
         
+        gamePanel.requestFocusInWindow();
         gamePanel.startGameThread();
+
     }
 }
