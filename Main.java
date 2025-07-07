@@ -1,4 +1,4 @@
-import javax.swing.JFrame;
+import javax.swing.JFrame; //Importando a Biblioteca JFrame
 
 public class Main {
 
@@ -8,5 +8,14 @@ public class Main {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("RPG 2D Simples");
+
+        GamePanel gamePanel = new GamePanel();
+        window.add(gamePanel);
+        window.pack();
+
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
+        
+        gamePanel.startGameThread();
     }
 }
