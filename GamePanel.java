@@ -8,6 +8,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     ArrayList<FallingObject> objects = new ArrayList<>(); // Criando um Array para definir as posições que os Objetos vão cair na tela
     int spawnTimer = 0;
+
+    ArrayList<EnemyFalling> enemy = new ArrayList<>(); // Criando um Array para Definir as posições que os Inimigos vão cair na tela 
+    int spawnEnemyTimer = 0;
+    
     
     final int tileSize = 48; //48x48 pixels por Tile
     final int maxScreenCol = 16;
@@ -63,8 +67,15 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
             spawnTimer = 0;
         }
 
+        // Gera novos Inimigos
+        spawnEnemyTimer++;
+        if(spawnEnemyTimer  > 80){
+            enemy.add(new EnemyFalling(this));
+            spawnEnemyTimer  = 0;
+        }
 
-        // Ataualiza e remove onjetos fora da Tela
+
+        // Ataualiza e remove objetos fora da Tela
         Iterator<FallingObject> it = objects.iterator();
         while(it.hasNext()){
             FallingObject obj = it.next();
@@ -72,6 +83,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
             if(obj.isOutOfScreen()){
                 it.remove();
             }
+        }
+
+        // Atualiza e  remove os Inimigos Fora da Tela
+
+        Iterator<EnemyFalling> ite = enemy.iterator();
+        while (ite.hasNext()) {
+            EnemyFalling ene = ite.next();
+            ene.update();
+            if(ene.isOutOfScreen()){
+                ite.remove();
+            }   
         }
 
 
@@ -89,6 +111,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         // Desenha objeto Caindo
         for (FallingObject obj : objects){
             obj.draw(g2);
+        }
+
+        // Desenha Inimigo
+        for( EnemyFalling ene : enemy ){
+            ene.draw(g2);
         }
         g2.dispose();
     }

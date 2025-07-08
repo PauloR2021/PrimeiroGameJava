@@ -14,7 +14,7 @@ public class FallingObject {
     public FallingObject(GamePanel gp){
         this.gp = gp;
         Random rand = new Random();
-        x = rand.nextInt(gp.screenWidth - size); /// Posição horizontal aleatória
+        x = rand.nextInt(gp.screenWidth - size); // Posição horizontal aleatória
         y = 0; //Começa no Topo da Tela
     }
 
