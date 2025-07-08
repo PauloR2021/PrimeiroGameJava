@@ -1,8 +1,13 @@
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
+
+    ArrayList<FallingObject> objects = new ArrayList<>(); // Criando um Array para definir as posições que os Objetos vão cair na tela
+    int spawnTimer = 0;
     
     final int tileSize = 48; //48x48 pixels por Tile
     final int maxScreenCol = 16;
@@ -50,13 +55,41 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     public void update(){
+
+        // Gera novos Objetos a cada X frames
+        spawnTimer++;
+        if(spawnTimer > 60){//A cada 1 Segundo 
+            objects.add(new FallingObject(this));
+            spawnTimer = 0;
+        }
+
+
+        // Ataualiza e remove onjetos fora da Tela
+        Iterator<FallingObject> it = objects.iterator();
+        while(it.hasNext()){
+            FallingObject obj = it.next();
+            obj.update();
+            if(obj.isOutOfScreen()){
+                it.remove();
+            }
+        }
+
+
         player.update();
     }
 
     public void paintComponent(Graphics g){
+
+        // Desenha o jogador
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         player.draw(g2);
+
+
+        // Desenha objeto Caindo
+        for (FallingObject obj : objects){
+            obj.draw(g2);
+        }
         g2.dispose();
     }
 

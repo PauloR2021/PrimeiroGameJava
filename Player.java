@@ -11,14 +11,15 @@ public class Player {
     public Player(GamePanel gp){
         this.gp = gp;
         x = 100;
-        y = 100;
-        speed =4;
+        y = 500;
+        speed = 10;
     }
 
     public void update(){
         System.out.println("Atualizando posição...");
         
         //Cima
+        /*/
         if(up && y - speed >=0){
             y -= speed; 
         }else if(W && y - speed >= 0){
@@ -30,7 +31,7 @@ public class Player {
             y += speed; 
         }else if( S && y + speed + gp.tileSize <= gp.screenHeight){
             y += speed;
-        }
+        }*/
 
         // Esquerda
         if(left && x - speed >= 0){
@@ -54,26 +55,28 @@ public class Player {
 
     public void keyPressed(KeyEvent e){
         int code = e.getKeyCode();
-        if(code == KeyEvent.VK_UP) up = true;
-        if(code == KeyEvent.VK_DOWN) down = true;
+
+        //if(code == KeyEvent.VK_UP) up = true;
+        //if(code == KeyEvent.VK_DOWN) down = true;
         if(code == KeyEvent.VK_LEFT) left = true;
         if(code == KeyEvent.VK_RIGHT) right = true;
 
-        if(code == KeyEvent.VK_W) W = true; 
-        if(code == KeyEvent.VK_S) S = true;
+        //if(code == KeyEvent.VK_W) W = true; 
+        //if(code == KeyEvent.VK_S) S = true;
         if(code == KeyEvent.VK_D) D = true;
         if(code == KeyEvent.VK_A) A = true;
     }
 
     public void keyReleased(KeyEvent e){
         int code = e.getKeyCode();
-        if(code == KeyEvent.VK_UP) up = false;
-        if(code == KeyEvent.VK_DOWN) down = false;
+
+        //if(code == KeyEvent.VK_UP) up = false;
+        //if(code == KeyEvent.VK_DOWN) down = false;
         if(code == KeyEvent.VK_LEFT) left = false;
         if(code == KeyEvent.VK_RIGHT) right = false;
 
-        if(code == KeyEvent.VK_W) W = false;
-        if(code == KeyEvent.VK_S) S = false;
+        //if(code == KeyEvent.VK_W) W = false;
+        //if(code == KeyEvent.VK_S) S = false;
         if(code == KeyEvent.VK_D) D = false;
         if(code == KeyEvent.VK_A) A = false;
     }
