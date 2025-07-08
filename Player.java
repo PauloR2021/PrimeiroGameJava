@@ -6,6 +6,7 @@ public class Player {
     int x,y, speed;
     boolean up, down, left,right;
     boolean A,S,D,W;
+    int lives = 3 ;
     GamePanel gp;
 
     public Player(GamePanel gp){
@@ -79,6 +80,15 @@ public class Player {
         //if(code == KeyEvent.VK_S) S = false;
         if(code == KeyEvent.VK_D) D = false;
         if(code == KeyEvent.VK_A) A = false;
+    }
+
+    // Criando as Vidas do Player
+    public int getLives(){
+        return lives;
+    }
+
+    public void loseLife(){ //Função para perder vida
+    lives --;
     }
     
 }
